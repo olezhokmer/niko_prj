@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+    api:
+        image: niko_api
+        build:
+            dockerfile: Dockerfile
+            context: .
+        depends_on: 
+            - postgres
+        environment:
+            JWT_SECRET: superSecret
+            DATABASE_URL: postgres://oleg:superPass@postgres:5432/niko_db
+            NODE_ENV: development
+            PORT: 8080
+        ports:
+            - "8080:8080"
+
+    postgres:
+        image: postgres:10.4
+        ports:
+            - "35000:5432"
+        environment: 
+            POSTGRES_USER: oleg
+            POSTGRES_PASSWORD: superPass
+            POSTGRES_DB: niko_db
