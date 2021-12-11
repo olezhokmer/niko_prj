@@ -53,6 +53,8 @@ export class AuthService {
     }
 
     async create(email : string, password : string) : Promise<User> {
+        const existed = await this.userRepo.findOne({ email : email });
+        if(existed) throw new HttpException("Email exists.", 400);
         const hash = await bcrypt.hash(password, await bcrypt.genSalt());
         return await this.userRepo.save({ email, password : hash })
     }
