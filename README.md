@@ -28,7 +28,7 @@ PUT http://localhost:8080/plan/
 
 # Update todolist item
 
-PATCH http://localhost:8080/plan/
+PATCH http://localhost:8080/plan/1
 
 { "value" : "Do something else" }
 
